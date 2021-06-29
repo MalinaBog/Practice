@@ -1,0 +1,148 @@
+%% -*- coding: utf-8 -*-
+\documentclass[12pt,a4paper]{scrartcl} 
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+\usepackage{misccorr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			\large
+			МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ
+			
+			Федеральное государственное бюджетное образовательное учреждение высшего образования
+			
+			\textbf{АДЫГЕЙСКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ}
+			\vspace{0.25cm}
+			
+			Инженерно-физический факультет
+			
+			Кафедра автоматизированных систем обработки информации и управления
+			\vfill
+
+			\vfill
+			
+			\textsc{Отчет по практике}\\[5mm]
+			
+			{\LARGE \textit{Текст из задания по варианту 8}}
+			\bigskip
+			
+			1 курс, группа 1УТС
+		\end{center}
+		\vfill
+		
+		\newlength{\ML}
+		\settowidth{\ML}{«\underline{\hspace{0.7cm}}» \underline{\hspace{2cm}}}
+		\hfill\begin{minipage}{0.5\textwidth}
+			Выполнил:\\
+			\underline{\hspace{\ML}} Б.\,Н.~Малинка\\
+			«\underline{\hspace{0.7cm}}» \underline{\hspace{2cm}} 2021 г.
+		\end{minipage}%
+		\bigskip
+		
+		\hfill\begin{minipage}{0.5\textwidth}
+			Руководитель:\\
+			\underline{\hspace{\ML}} С.\,В.~Теплоухов\\
+			«\underline{\hspace{0.7cm}}» \underline{\hspace{2cm}} 2021 г.
+		\end{minipage}%
+		\vfill
+		
+		\begin{center}
+			Майкоп, 2021 г.
+		\end{center}
+	\end{titlepage}
+
+\section{Введение}
+\label{sec:intro}
+
+% Что должно быть во введении
+\begin{enumerate}
+ \item Написать приложение для обхода графа в ширину.
+ \item Пример кода, решающего данную задачу
+ \item Граф
+ \item Скриншоты программы
+ \item Присер библиографических ссылок
+\end{enumerate}
+
+Пример приведен в пункте ~\ref{sec:exp} на стр.~\pageref{sec:exp}.
+
+\section{Ход работы}
+\label{sec:exp}
+
+\subsection{Код приложения}
+\label{sec:exp:code}
+\begin{verbatim}
+#include <iostream>
+#include <locale>
+#include <queue>
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "russian");
+	queue<int> Queue;
+
+	int mas[6][6] = { {0,1,0,1,1,0}, {1,0,1,1,0,0},
+	{0,1,0,0,1,0},
+	{1,1,0,0,1,0},
+	{1,0,1,1,0,1},
+	{0,0,0,0,1,0} };
+	int nodes[6];
+	for (int i = 0; i < 6; i++)
+		nodes[i] = 0;
+	Queue.push(0);
+	while (!Queue.empty()) {
+		int node = Queue.front();
+		Queue.pop();
+		nodes[node] = 2;
+		for (int j = 0; j < 7; j++) {
+			if (mas[node][j] == 1 && nodes[j] == 0) {
+				Queue.push(j);
+				nodes[j] = 1;
+			}
+		}
+		cout << node + 1 << endl;
+	}
+	cin.get();
+	return 0;
+}
+\end{verbatim}
+\section{Пример вставки изображения}
+\label{sec:picexample}
+\begin{figure}[h]
+    \includegraphics[width=0.6\textwidth]{matrixsmegn.png}
+    \caption{Матрица смежности}\label{fig:par1}
+	\includegraphics[width=0.6\textwidth]{grapf.png}
+	\caption{Граф}\label{fig:par}
+\end{figure}
+Пример матрицы смежности представлен на рис.~\ref{fig:par1}.
+
+Пример графа представлен на рис.~\ref{fig:par}.
+
+\section{Скриншоты программы}
+\includegraphics[width=0.7\textwidth]{screen1.png}
+
+Код программы 
+
+\includegraphics[width=0.7\textwidth]{screen1.1.png}
+
+Код програмы
+
+\includegraphics[width=0.7\textwidth]{screen1.2.png}
+
+Результат программы
+
+\section{Пример библиографических ссылок}
+
+Для изучения «внутренностей» \TeX{} необходимо 
+изучить~\cite{Knuth-2003}, а для использования \LaTeX{} лучше
+почитать~\cite{Lvovsky-2003, Voroncov-2005}.
+
+\begin{thebibliography}{9}
+\bibitem{Knuth-2003}Кнут Д.Э. Всё про \TeX. \newblock --- Москва: Изд. Вильямс, 2003 г. 550~с.
+\bibitem{Lvovsky-2003}Львовский С.М. Набор и верстка в системе \LaTeX{}. \newblock --- 3-е издание, исправленное и дополненное, 2003 г.
+\bibitem{Voroncov-2005}Воронцов К.В. \LaTeX{} в примерах. 2005 г.
+\end{thebibliography}
+
+\end{document}
